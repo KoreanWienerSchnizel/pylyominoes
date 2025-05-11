@@ -23,11 +23,8 @@ class Bag:
                 color = gen_random_color()
             self.add_polyomino_set(matrix, size, color)
 
-
-    def add_polyomino_set(self, matrix, size, color)
-        self.polyomino_set.append(
-            Polyomino(size, tile_matrix=matrix, color=color)
-        )
+    def add_polyomino_set(self, matrix, size, color):
+        self.polyomino_set.append(Polyomino(size, tile_matrix=matrix, color=color))
 
     def populate_bag(self):
         pieces = []
