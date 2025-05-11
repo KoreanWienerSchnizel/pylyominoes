@@ -57,7 +57,7 @@ class Tile:
 
 
 class Polyomino:
-    def __init__(self, size, coord, tile_matrix=None, color="blue"):
+    def __init__(self, size, coord=None, tile_matrix=None, color="blue"):
         self.size = size
         self.coord = coord
         self.color = color
@@ -70,6 +70,15 @@ class Polyomino:
         if self.coord:
             self.tiles = self.get_tiles()
 
+    def draw(self, surface):
+        if not self.tiles:
+            return
+        for tile in self.tiles:
+            tile.draw(surface)
+
+    def set_coord(self, coord):
+        self.coord = coord
+
     def get_tiles(self):
         tiles = []
         m_height = len(self.tile_matrix)
@@ -80,6 +89,7 @@ class Polyomino:
                     tiles.append(
                         Tile((self.coord[0] + x, self.coord[1] + y), self.color)
                     )
+        return tiles
 
     def gen_tile_matrix(self):
         num_tiles = self.size

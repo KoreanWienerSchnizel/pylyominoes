@@ -2,6 +2,7 @@ import pygame
 from pygame.rect import Rect
 
 from constants import (
+    CLASSIC_PIECES,
     GRID_BUFFER_HEIGHT,
     GRID_COL,
     GRID_HEIGHT,
@@ -12,7 +13,7 @@ from constants import (
     GRID_ROW,
     GRID_WIDTH,
 )
-from polyomino import Tile
+from polyomino import Polyomino, Tile
 from util import get_playfield_coord
 
 
@@ -27,10 +28,10 @@ class Grid:
 
     def update(self):
         self.grid_surface.fill("0x3e5c76")
+        piece = Polyomino(4, (5, 10), CLASSIC_PIECES["J"])
+        piece.draw(self.grid_surface)
         tile0 = Tile((0, GRID_ROW - 1))
-        tile1 = Tile((0, 10), "green")
         tile0.draw(self.grid_surface)
-        tile1.draw(self.grid_surface)
         self.draw_gridlines()
 
     def draw_gridlines(self):
