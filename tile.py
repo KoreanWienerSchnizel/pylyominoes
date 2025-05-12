@@ -12,7 +12,7 @@ class Tile:
 
     def draw(self, surface):
         if not self.coord:
-            raise ValueError("Tile draw func: No Coord")
+            raise ValueError("Tile.draw: No Coord")
         color = self.color.hsla
         light_value = color[2] * 1.3
         shade_value = color[2] * 0.7

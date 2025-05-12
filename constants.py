@@ -1,3 +1,5 @@
+from enum import Enum
+
 SCREEN_WIDTH = 1280
 SCREEN_HEIGHT = 720
 FPS_CAP = 5
@@ -22,6 +24,16 @@ GRID_OFFSET_X = (SCREEN_WIDTH // 2) - (GRID_WIDTH // 2)
 GRID_OFFSET_Y = (
     (SCREEN_HEIGHT // 2) - (GRID_PLAYFIELD_HEIGHT // 2)
 ) - GRID_BUFFER_HEIGHT
+
+LIVE_TIME = 1000
+
+
+class Move(Enum):
+    UP = 0
+    DOWN = 1
+    LEFT = 2
+    RIGHT = 3
+
 
 CLASSIC_PIECES = {
     "I": [[1, 1, 1, 1]],

@@ -5,7 +5,7 @@ from util import gen_random_color
 
 
 class Bag:
-    def __init__(self, tile_matrix_list=None):
+    def __init__(self, tile_matrix_list=None, color_list=None):
         self.polyomino_set = []
         self.bag = []
         if tile_matrix_list:
@@ -17,10 +17,12 @@ class Bag:
             raise Exception("Bag.populate_set: No Tile Matrix found")
         for matrix in tile_matrix_list:
             size = sum([sum(i) for i in matrix])
-            if len(color_list) > 0:
-                color = color_list.pop(0)
-            else:
+            if not color_list:
                 color = gen_random_color()
+            elif len(color_list) > 0:
+                color = gen_random_color()
+            else:
+                color = color_list.pop(0)
             self.add_polyomino_set(matrix, size, color)
 
     def add_polyomino_set(self, matrix, size, color):
@@ -36,4 +38,5 @@ class Bag:
     def draw_piece(self):
         if len(self.bag) < 5:
             self.populate_bag()
+
         return self.bag.pop(0)

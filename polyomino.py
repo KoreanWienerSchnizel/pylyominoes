@@ -1,3 +1,4 @@
+from constants import Move
 from tile import Tile
 
 
@@ -6,6 +7,7 @@ class Polyomino:
         self.size = size
         self.coord = coord
         self.color = color
+        self.tiles = []
 
         if tile_matrix:
             self.tile_matrix = tile_matrix
@@ -20,6 +22,48 @@ class Polyomino:
             return
         for tile in self.tiles:
             tile.draw(surface)
+
+    def move(self, direction, grid):
+        match direction:
+            case Move.UP:
+                for tile in self.tiles:
+                    new_coord = (tile.coord[0], tile.coord[1] - 1)
+                    if not grid.check_open_space(new_coord):
+                        return False
+                for tile in self.tiles:
+                    tile.coord = (tile.coord[0], tile.coord[1] - 1)
+                self.coord = (self.coord[0], self.coord[1] - 1)
+
+            case Move.DOWN:
+                for tile in self.tiles:
+                    new_coord = (tile.coord[0], tile.coord[1] + 1)
+                    if not grid.check_open_space(new_coord):
+                        return False
+                for tile in self.tiles:
+                    tile.coord = (tile.coord[0], tile.coord[1] + 1)
+                self.coord = (self.coord[0], self.coord[1] + 1)
+
+            case Move.LEFT:
+                for tile in self.tiles:
+                    new_coord = (tile.coord[0] - 1, tile.coord[1])
+                    if not grid.check_open_space(new_coord):
+                        return False
+                for tile in self.tiles:
+                    tile.coord = (tile.coord[0] - 1, tile.coord[1])
+                self.coord = (self.coord[0] - 1, self.coord[1])
+
+            case Move.RIGHT:
+                for tile in self.tiles:
+                    new_coord = (tile.coord[0] + 1, tile.coord[1])
+                    if not grid.check_open_space(new_coord):
+                        return False
+                for tile in self.tiles:
+                    tile.coord = (tile.coord[0] + 1, tile.coord[1])
+                self.coord = (self.coord[0] + 1, self.coord[1])
+
+            case _:
+                raise ValueError("Polyomino.move: Incorrect/No direction specified")
+        return True
 
     def set_coord(self, coord):
         self.coord = coord
