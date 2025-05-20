@@ -28,6 +28,7 @@ class Game:
         live_dt = LIVE_TIME
         difficulty = 1000
         game_tick = difficulty
+
         running = True
         while running:
             game_tick -= dt
@@ -51,13 +52,19 @@ class Game:
                         running = False
 
                     if event.key == pygame.K_SPACE:
-                        while live_piece.move(Move.DOWN, game_grid):
-                            continue
-                        live_dt = LIVE_TIME
-                        game_tick = difficulty
+                        if not live_piece.move(Move.DOWN, game_grid):
+                            game_grid.place_piece(live_piece)
+                            live_piece = self.new_piece(bag, game_grid)
+                            live_dt = LIVE_TIME
+                        else:
+                            while live_piece.move(Move.DOWN, game_grid):
+                                continue
+                            live_dt = LIVE_TIME
+                            game_tick = difficulty
 
                     if event.key == pygame.K_w or event.key == pygame.K_UP:
-                        live_piece.move(Move.UP, game_grid)
+                        live_piece.rotate(game_grid)
+                        live_dt = LIVE_TIME
 
                     elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
                         game_tick = difficulty
@@ -84,11 +91,9 @@ class Game:
 
     def new_piece(self, bag, grid):
         piece = bag.draw_piece()
-        piece.set_coord(
-            (
-                (grid.col // 2) - (len(piece.tile_matrix[0]) // 2),
-                (GRID_BUFFER_ROW - len(piece.tile_matrix)),
-            )
+        piece.coord = (
+            (grid.col // 2) - (len(piece.tile_matrix[0]) // 2),
+            (GRID_BUFFER_ROW - len(piece.tile_matrix)),
         )
         piece.tiles = piece.get_tiles()
         return piece

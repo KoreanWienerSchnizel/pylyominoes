@@ -34,12 +34,11 @@ class Grid:
     def place_piece(self, piece):
         if not piece.coord:
             raise ValueError("Grid.place_piece: no coord given")
-
-        for y in range(len(piece.tile_matrix)):
-            for x in range(len(piece.tile_matrix[y])):
-                self.grid_matrix[piece.coord[1] + y][piece.coord[0] + x] = (
-                    piece.tile_matrix[y][x]
-                )
+        m_length = len(piece.tile_matrix)
+        for y in range(m_length):
+            for x in range(m_length):
+                if piece.tile_matrix[y][x] == 1:
+                    self.grid_matrix[piece.coord[1] + y][piece.coord[0] + x] = 1
 
     def check_open_space(self, coord):
         if coord[0] < 0 or coord[0] >= self.col:
