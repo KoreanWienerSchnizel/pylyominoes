@@ -6,7 +6,7 @@ from game import Game
 def main():
     pygame.init()
     game = Game()
-    game.run()
+    game.classic_game()
     pygame.quit()
 
 
