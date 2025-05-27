@@ -8,7 +8,9 @@ This project was done for
 
 # How to Play
 ASD / Arrow keys to move the block left right and down
+
 W / Up arrow to rotate the block
+
 Spacebar to fast fall
 
 # Roadmap
