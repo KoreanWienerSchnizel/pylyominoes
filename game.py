@@ -98,6 +98,7 @@ class Game:
             self.game_grid.update()
             self.live_piece.draw(self.game_grid.grid_surface)
             self.game_grid.draw(self.screen)
+            self.draw_score()
             self.draw_piece_preview(self.preview_surface)
 
             print(f"score: {self.total_score}")
@@ -150,3 +151,18 @@ class Game:
                 GRID_OFFSET_Y + GRID_BUFFER_HEIGHT,
             ),
         )
+
+    def draw_score(self):
+        font = pygame.font.Font("freesansbold.ttf", 32)
+        text = [
+            f"SCORE:{self.total_score}",
+            f"LINES_CLEARED:{self.total_lines_cleared}",
+        ]
+        text_render = []
+        for i in range(len(text)):
+            text_render.append(font.render(text[i], True, "white"))
+        x = GRID_OFFSET_X + (self.game_grid.col * TILE_SIZE) + PREVIEW_SIZE + 5
+        y = GRID_OFFSET_Y + GRID_BUFFER_HEIGHT
+        for i in range(len(text_render)):
+            self.screen.blit(text_render[i], (x, y))
+            y += text_render[i].get_height() + 2
