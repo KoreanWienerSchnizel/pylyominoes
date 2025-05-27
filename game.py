@@ -40,8 +40,7 @@ class Game:
 
     def classic_game(self):
         self.game_grid = Grid()
-        # self.bag = Bag(list(CLASSIC_PIECES.values()), list(CLASSIC_COLORS.values()))
-        self.bag = Bag([CLASSIC_PIECES["I"]], [CLASSIC_COLORS["I"]])
+        self.bag = Bag(list(CLASSIC_PIECES.values()), list(CLASSIC_COLORS.values()))
         self.preview_surface = pygame.surface.Surface((PREVIEW_SIZE, PREVIEW_SIZE))
         self.difficulty = 1000
         game_tick = self.difficulty
@@ -101,9 +100,6 @@ class Game:
             self.draw_score()
             self.draw_piece_preview(self.preview_surface)
 
-            print(f"score: {self.total_score}")
-            print(f"lines_cleared: {self.total_lines_cleared}")
-
             pygame.display.flip()
             self.dt = self.clock.tick()
 
@@ -122,7 +118,7 @@ class Game:
         score = score * (1 + (self.combo * COMBO_MULT))
         self.combo += 1
         self.total_lines_cleared += lines_cleared
-        self.total_score += score
+        self.total_score += int(score)
 
     def new_piece(self):
         self.live_piece = self.bag.draw_piece()
@@ -155,8 +151,8 @@ class Game:
     def draw_score(self):
         font = pygame.font.Font("freesansbold.ttf", 32)
         text = [
-            f"SCORE:{self.total_score}",
-            f"LINES_CLEARED:{self.total_lines_cleared}",
+            f"SCORE: {self.total_score}",
+            f"LINES: {self.total_lines_cleared}",
         ]
         text_render = []
         for i in range(len(text)):
