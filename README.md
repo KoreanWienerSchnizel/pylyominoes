@@ -1,6 +1,5 @@
 # Pylyominoes
 This is a clone of a classic block puzzle game written in python using pygame.
-This project was done for 
 
 # Requirements
 1. Python 3.12+
