@@ -5,21 +5,19 @@ from util import gen_random_color
 
 
 class Bag:
-    def __init__(self, tile_matrix_list=None, color_list=None):
+    def __init__(self, tile_matrix_list=None, color_list=[]):
         self.polyomino_set = []
         self.bag = []
         if tile_matrix_list:
-            self.populate_set(tile_matrix_list)
+            self.populate_set(tile_matrix_list, color_list)
             self.populate_bag()
 
-    def populate_set(self, tile_matrix_list, color_list=None):
+    def populate_set(self, tile_matrix_list, color_list=[]):
         if not tile_matrix_list:
             raise Exception("Bag.populate_set: No Tile Matrix found")
         for matrix in tile_matrix_list:
             size = sum([sum(i) for i in matrix])
-            if not color_list:
-                color = gen_random_color()
-            elif len(color_list) > 0:
+            if len(color_list) == 0:
                 color = gen_random_color()
             else:
                 color = color_list.pop(0)

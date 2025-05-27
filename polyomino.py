@@ -1,4 +1,4 @@
-from constants import Move
+from constants import PREVIEW_SIZE, Move
 from tile import Tile
 
 
@@ -18,6 +18,16 @@ class Polyomino:
             return
         for tile in self.tiles:
             tile.draw(surface)
+
+    def draw_preview(self, surface):
+        if not self.tile_matrix:
+            return
+        m_len = len(self.tile_matrix)
+        tile_size = PREVIEW_SIZE // m_len
+        for y in range(m_len):
+            for x in range(m_len):
+                if self.tile_matrix[y][x] == 1:
+                    Tile((x, y), self.color).draw(surface, tile_size)
 
     def move(self, direction, grid):
         match direction:

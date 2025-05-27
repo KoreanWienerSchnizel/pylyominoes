@@ -59,7 +59,7 @@ class Grid:
         return lines_cleared
 
     def clear_line(self, line_num):
-        clear_line = [0 for _ in range(self.row)]
+        clear_line = [0 for _ in range(self.col)]
         self.grid_matrix.pop(line_num)
         self.grid_matrix.insert(0, clear_line)
 
